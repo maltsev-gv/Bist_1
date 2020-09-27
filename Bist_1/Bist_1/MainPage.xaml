@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+            xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:vm123="clr-namespace:Bist_1.ViewModels;assembly=Bist_1"
+            x:Class="Bist_1.MainPage">
+    <ContentPage.BindingContext>
+        <vm123:MainViewModel/>
+    </ContentPage.BindingContext>
+    <StackLayout>
+        <Frame BackgroundColor="LightSkyBlue" Padding="10,50,0,10" CornerRadius="{Binding Radius}" BorderColor="Red" >
+            <Label Text="{Binding ColorName}" HorizontalTextAlignment="Center" 
+                   TextColor="{Binding ColorName}" FontSize="36" 
+                   FontAttributes="Bold,Italic"/>
+        </Frame>
+        <Label Text="Start developing now" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Italic"/>
+        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" 
+               FontSize="16" Padding="30,0,30,0"/>
+        <Label Margin="30,24,30,0">
+            <Label.FontSize>50</Label.FontSize>
+            <Label.FormattedText>
+                <FormattedString>
+                    <FormattedString.Spans>
+                        <Span Text="Learn more at " FontAttributes="Italic" FontSize="30"/>
+                        <Span Text="https://aka.ms/xamarin-quickstart" TextColor="BlueViolet"/>
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Button Text="Нажми меня" Clicked="Button_OnClicked" ></Button>
+    </StackLayout>
+
+</ContentPage>
