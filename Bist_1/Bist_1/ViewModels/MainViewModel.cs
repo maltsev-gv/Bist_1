@@ -4,14 +4,22 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Bist_1.Annotations;
+using Bist_1.Models;
+using Bist_1.Services;
 using Rcn.Common;
 
 namespace Bist_1.ViewModels
 {
     public class MainViewModel : ObservableObject
     {
+        private DataManager _dataManager;
+
+        public List<UserInfo> Users { get; private set; }
+
         public MainViewModel()
         {
+            _dataManager = new DataManager();
+            Users = _dataManager.GetUsers();
             //object obj = new object();
 
             //double x = 5.56e12;
@@ -46,6 +54,24 @@ namespace Bist_1.ViewModels
             }
         }
 
+        public string Login
+        {
+            get => GetVal<string>();
+            set => SetVal(value);
+        }
+
+        //public string Login
+        //{
+        //    get => GetVal<string>();
+        //    set => SetVal(value, () => IsButtonEnabled = !string.IsNullOrEmpty(value));
+        //}
+
+        //public bool IsButtonEnabled
+        //{
+        //    get => GetVal<bool>();
+        //    set => SetVal(value);
+        //}
+
         public void MyMethod()
         { 
             RaisePropertyChanged();
@@ -62,12 +88,12 @@ namespace Bist_1.ViewModels
         //    }
         //}
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        //public event PropertyChangedEventHandler PropertyChanged;
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        //[NotifyPropertyChangedInvocator]
+        //protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        //}
     }
 }

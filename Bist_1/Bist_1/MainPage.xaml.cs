@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bist_1.Models;
 using Bist_1.ViewModels;
 using Xamarin.Forms;
 
@@ -30,6 +31,15 @@ namespace Bist_1
                         : 30;
                 viewModel.ColorName = viewModel.ColorName == "Aqua" ? "Magenta" : "Aqua";
             }
+        }
+
+        private void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var userInfo = e.Item as UserInfo;
+
+            var context = mainPage.BindingContext;
+            var viewModel = context as MainViewModel;
+            viewModel.Login = userInfo.Name;
         }
     }
 }

@@ -3,7 +3,10 @@
             xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:vm123="clr-namespace:Bist_1.ViewModels;assembly=Bist_1"
-            x:Class="Bist_1.MainPage">
+            xmlns:converters="clr-namespace:Bist_1.Converters;assembly=Bist_1"
+            x:Class="Bist_1.MainPage"
+            x:Name="mainPage"
+            >
     <ContentPage.BindingContext>
         <vm123:MainViewModel/>
     </ContentPage.BindingContext>
@@ -13,10 +16,11 @@
                    TextColor="{Binding ColorName}" FontSize="36" 
                    FontAttributes="Bold,Italic"/>
         </Frame>
-        <Label Text="Start developing now" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Italic"/>
+        <Label Text="Start developing now" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold,Italic"/>
         <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" 
                FontSize="16" Padding="30,0,30,0"/>
-        <Label Margin="30,24,30,0">
+        <Entry Text="{Binding Login}" Keyboard="Text"/>
+        <!--<Label Margin="30,24,30,0">
             <Label.FontSize>50</Label.FontSize>
             <Label.FormattedText>
                 <FormattedString>
@@ -26,8 +30,37 @@
                     </FormattedString.Spans>
                 </FormattedString>
             </Label.FormattedText>
-        </Label>
-        <Button Text="Нажми меня" Clicked="Button_OnClicked" ></Button>
+        </Label>-->
+        <ListView ItemsSource="{Binding Users}" Margin="10,0" HasUnevenRows="True" SeparatorVisibility="Default" SeparatorColor="Chocolate"
+                  SelectionMode="None" ItemTapped="ListView_OnItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame BackgroundColor="DarkSeaGreen" Padding="0" CornerRadius="10" BorderColor="Magenta" Margin="0,5">
+                        <Grid Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0" Text="{Binding Name}" TextColor="Blue"/>
+                            <Label Grid.Column="1" Grid.Row="0" Text="{Binding Age}" FontAttributes="Bold"/>
+                            <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Photo}" HorizontalOptions="Center" FontSize="16"/>
+                        </Grid>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+        <!--<Button Text="Нажми меня" Clicked="Button_OnClicked" IsEnabled="{Binding BindingContext, Source={x:Reference mainPage}, 
+            Converter={StaticResource emptyStringToBoolConverter}}"/>-->
+        <Button Text="Нажми меня" Clicked="Button_OnClicked" IsEnabled="{Binding Login, Converter={StaticResource emptyStringToBoolConverter}}" 
+                Margin="0,0,0,200" />
+        <!--<Button Text="Нажми меня 2" Clicked="Button_OnClicked" IsEnabled="{Binding , Converter={converters:EmptyStringToBoolConverter}}"/>-->
     </StackLayout>
 
 </ContentPage>
