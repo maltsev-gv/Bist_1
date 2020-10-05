@@ -17,21 +17,21 @@ namespace Bist_1
             InitializeComponent();
         }
 
-        private void Button_OnClicked(object sender, EventArgs e)
-        {
-            var context = ((Button) sender).BindingContext;
-            var viewModel = context as MainViewModel;
-            var rad = viewModel?.Radius;
-            if (viewModel != null)
-            {
-                viewModel.Radius = rad == 30
-                    ? 100
-                    : rad == 100
-                        ? 50
-                        : 30;
-                viewModel.ColorName = viewModel.ColorName == "Aqua" ? "Magenta" : "Aqua";
-            }
-        }
+        //private void Button_OnClicked(object sender, EventArgs e)
+        //{
+        //    var context = ((Button) sender).BindingContext;
+        //    var viewModel = context as MainViewModel;
+        //    var rad = viewModel?.Radius;
+        //    if (viewModel != null)
+        //    {
+        //        viewModel.Radius = rad == 30
+        //            ? 100
+        //            : rad == 100
+        //                ? 50
+        //                : 30;
+        //        viewModel.ColorName = viewModel.ColorName == "Aqua" ? "Magenta" : "Aqua";
+        //    }
+        //}
 
         private void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
         {

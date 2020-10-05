@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Bist_1.ExtensionMethods
+{
+    public static class NumberExtensions
+    {
+        public static bool IsDoubleEqual(this double val1, double val2)
+        {
+            return Math.Abs(val1 - val2) < 0.00001;
+        }
+
+        public static bool IsNullOrEmpty(this string inStr)
+        {
+            return string.IsNullOrEmpty(inStr);
+        }
+
+    }
+}

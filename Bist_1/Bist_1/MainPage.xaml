@@ -32,7 +32,7 @@
             </Label.FormattedText>
         </Label>-->
         <ListView ItemsSource="{Binding Users}" Margin="10,0" HasUnevenRows="True" SeparatorVisibility="Default" SeparatorColor="Chocolate"
-                  SelectionMode="None" ItemTapped="ListView_OnItemTapped">
+                  SelectionMode="None" ItemTapped="ListView_OnItemTapped" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -48,7 +48,8 @@
                             </Grid.RowDefinitions>
                             <Label Grid.Column="0" Grid.Row="0" Text="{Binding Name}" TextColor="Blue"/>
                             <Label Grid.Column="1" Grid.Row="0" Text="{Binding Age}" FontAttributes="Bold"/>
-                            <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Photo}" HorizontalOptions="Center" FontSize="16"/>
+                            <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Photo}" HorizontalOptions="Center" FontSize="16"
+                                   IsVisible="{Binding Photo, Converter={StaticResource emptyStringToBoolConverter}}" BackgroundColor="DeepSkyBlue"/>
                         </Grid>
                         </Frame>
                     </ViewCell>
@@ -58,8 +59,9 @@
         </ListView>
         <!--<Button Text="Нажми меня" Clicked="Button_OnClicked" IsEnabled="{Binding BindingContext, Source={x:Reference mainPage}, 
             Converter={StaticResource emptyStringToBoolConverter}}"/>-->
-        <Button Text="Нажми меня" Clicked="Button_OnClicked" IsEnabled="{Binding Login, Converter={StaticResource emptyStringToBoolConverter}}" 
-                Margin="0,0,0,200" />
+        <Button Text="Нажми меня" 
+                Margin="0,0,0,100" Command="{Binding ChangeRadiusCommand}" CommandParameter="{Binding}" 
+                IsEnabled="{Binding Login, Converter={StaticResource emptyStringToBoolConverter}}" />
         <!--<Button Text="Нажми меня 2" Clicked="Button_OnClicked" IsEnabled="{Binding , Converter={converters:EmptyStringToBoolConverter}}"/>-->
     </StackLayout>
 

@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Windows.Input;
 using Bist_1.Annotations;
+using Bist_1.ExtensionMethods;
 using Bist_1.Models;
 using Bist_1.Services;
 using Rcn.Common;
+using Xamarin.Forms;
 
 namespace Bist_1.ViewModels
 {
@@ -14,12 +20,14 @@ namespace Bist_1.ViewModels
     {
         private DataManager _dataManager;
 
-        public List<UserInfo> Users { get; private set; }
+        public ObservableCollection<UserInfo> Users { get; } 
 
         public MainViewModel()
         {
             _dataManager = new DataManager();
-            Users = _dataManager.GetUsers();
+            Users = new ObservableCollection<UserInfo>(_dataManager.GetUsers());
+            Users.CollectionChanged += Users_CollectionChanged;
+            ChangeRadiusCommand = new Command(obj => ChangeRadiusMethod(obj, true));
             //object obj = new object();
 
             //double x = 5.56e12;
@@ -30,6 +38,33 @@ namespace Bist_1.ViewModels
 
         }
 
+        private void Users_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            Debug.WriteLine(nameof(Users_CollectionChanged));
+        }
+
+        private void ChangeRadiusMethod(object obj, bool isEnabled)
+        {
+            Users.CollectionChanged -= Users_CollectionChanged2;
+            Users.CollectionChanged += Users_CollectionChanged2;
+            var rad = Radius;
+            Radius = rad.IsDoubleEqual(30)
+                ? 100
+                : rad.IsDoubleEqual(100)
+                    ? 50
+                    : 30;
+            ColorName = ColorName == "Aqua" ? "Magenta" : "Aqua";
+            Users.Add(new UserInfo("Джон Смит", 45, ""));
+            //RaisePropertyChanged(nameof(Users));
+        }
+
+        private void Users_CollectionChanged2(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            Debug.WriteLine(nameof(Users_CollectionChanged2));
+        }
+
+        public ICommand ChangeRadiusCommand { get; } 
+
         [InitialValue("LightGreen")]
         public string ColorName
         {
@@ -38,7 +73,7 @@ namespace Bist_1.ViewModels
         }
 
 
-        public int BasicRadius => 10;
+        public static int BasicRadius => 10;
 
         public double Radius
         {
@@ -73,7 +108,7 @@ namespace Bist_1.ViewModels
         //}
 
         public void MyMethod()
-        { 
+        {
             RaisePropertyChanged();
         }
 
