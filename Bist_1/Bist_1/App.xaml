@@ -6,6 +6,13 @@
     <Application.Resources>
         <ResourceDictionary>
             <converters:EmptyStringToBoolConverter x:Key="emptyStringToBoolConverter"/>
+            <converters:AgeClassifierConverter x:Key="ageClassifierConverter"/>
+
+            <Style TargetType="{x:Type Label}" x:Key="labelRedStyle">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="TextColor" Value="Red"/>
+                <Setter Property="Opacity" Value="0.5"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

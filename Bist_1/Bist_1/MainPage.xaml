@@ -4,21 +4,88 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:vm123="clr-namespace:Bist_1.ViewModels;assembly=Bist_1"
             xmlns:converters="clr-namespace:Bist_1.Converters;assembly=Bist_1"
+            xmlns:enums="clr-namespace:Bist_1.Models;assembly=Bist_1"
             x:Class="Bist_1.MainPage"
             x:Name="mainPage"
             >
     <ContentPage.BindingContext>
         <vm123:MainViewModel/>
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style TargetType="{x:Type Label}" BasedOn="{StaticResource labelRedStyle}" x:Key="labelUnderlinedStyle">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="TextDecorations" Value="Underline"/>
+        </Style>
+
+        <DataTemplate x:Key="commonUserItemTemplate">
+            <ViewCell>
+                <Frame BackgroundColor="DarkSeaGreen" Padding="0" CornerRadius="10" BorderColor="Magenta" Margin="0,5">
+                    <Grid Margin="10">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Column="0" Grid.Row="0" Text="{Binding Name}" TextColor="Blue">
+                            <Label.Style>
+                                <Style TargetType="{x:Type Label}" BasedOn="{StaticResource labelUnderlinedStyle}">
+                                    <Style.Triggers>
+                                        <DataTrigger TargetType="{x:Type Label}" 
+                                                             Binding="{Binding Category}" Value="{x:Static enums:UserCategories.Admin}">
+                                            <Setter Property="TextColor" Value="Yellow"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger TargetType="{x:Type Label}" 
+                                                             Binding="{Binding Age, Converter={StaticResource ageClassifierConverter}}" Value="0">
+                                            <Setter Property="BackgroundColor" Value="Green"/>
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="{x:Type Label}" 
+                                                             Binding="{Binding Age, Converter={StaticResource ageClassifierConverter}}" Value="1">
+                                            <Setter Property="BackgroundColor" Value="Black"/>
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="{x:Type Label}" 
+                                                             Binding="{Binding Age, Converter={StaticResource ageClassifierConverter}}" Value="2">
+                                            <Setter Property="BackgroundColor" Value="Magenta"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Label.Style>
+                        </Label>
+                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding Age}" FontAttributes="Bold" Style="{StaticResource labelRedStyle}"/>
+                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Photo}" HorizontalOptions="Center" FontSize="16"
+                                   IsVisible="{Binding Photo, Converter={StaticResource emptyStringToBoolConverter}}" BackgroundColor="DeepSkyBlue"/>
+                    </Grid>
+                </Frame>
+            </ViewCell>
+        </DataTemplate>
+
+        <converters:UserCategorySelector x:Key="userCategorySelector" CommonTemplate="{StaticResource commonUserItemTemplate}">
+            <converters:UserCategorySelector.AdminTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame CornerRadius="0" BackgroundColor="Orange">
+                            <Label Text="{Binding Name}" FontAttributes="Bold" TextDecorations="Strikethrough"/>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </converters:UserCategorySelector.AdminTemplate>
+        </converters:UserCategorySelector>
+
+    </ContentPage.Resources>
+
     <StackLayout>
         <Frame BackgroundColor="LightSkyBlue" Padding="10,50,0,10" CornerRadius="{Binding Radius}" BorderColor="Red" >
             <Label Text="{Binding ColorName}" HorizontalTextAlignment="Center" 
                    TextColor="{Binding ColorName}" FontSize="36" 
                    FontAttributes="Bold,Italic"/>
         </Frame>
-        <Label Text="Start developing now" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold,Italic"/>
+        <Label Text="Start developing now" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold,Italic" Style="{StaticResource labelRedStyle}"/>
         <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" 
-               FontSize="16" Padding="30,0,30,0"/>
+               FontSize="16" Padding="30,0,30,0" Style="{StaticResource labelUnderlinedStyle}"/>
         <Entry Text="{Binding Login}" Keyboard="Text"/>
         <!--<Label Margin="30,24,30,0">
             <Label.FontSize>50</Label.FontSize>
@@ -32,29 +99,7 @@
             </Label.FormattedText>
         </Label>-->
         <ListView ItemsSource="{Binding Users}" Margin="10,0" HasUnevenRows="True" SeparatorVisibility="Default" SeparatorColor="Chocolate"
-                  SelectionMode="None" ItemTapped="ListView_OnItemTapped" >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Frame BackgroundColor="DarkSeaGreen" Padding="0" CornerRadius="10" BorderColor="Magenta" Margin="0,5">
-                        <Grid Margin="10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5*"/>
-                                <ColumnDefinition Width="3*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Label Grid.Column="0" Grid.Row="0" Text="{Binding Name}" TextColor="Blue"/>
-                            <Label Grid.Column="1" Grid.Row="0" Text="{Binding Age}" FontAttributes="Bold"/>
-                            <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Photo}" HorizontalOptions="Center" FontSize="16"
-                                   IsVisible="{Binding Photo, Converter={StaticResource emptyStringToBoolConverter}}" BackgroundColor="DeepSkyBlue"/>
-                        </Grid>
-                        </Frame>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+                  SelectionMode="None" ItemTapped="ListView_OnItemTapped" ItemTemplate="{StaticResource userCategorySelector}">
 
         </ListView>
         <!--<Button Text="Нажми меня" Clicked="Button_OnClicked" IsEnabled="{Binding BindingContext, Source={x:Reference mainPage}, 

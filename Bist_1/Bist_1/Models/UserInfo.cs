@@ -32,5 +32,11 @@ namespace Bist_1.Models
             get => GetVal<string>();
             set => SetVal(value);
         }
+
+        public UserCategories Category
+        {
+            get => GetVal<UserCategories>();
+            set => SetVal(value);
+        }
     }
 }

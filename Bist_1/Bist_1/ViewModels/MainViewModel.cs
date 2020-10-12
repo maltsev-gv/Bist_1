@@ -54,7 +54,7 @@ namespace Bist_1.ViewModels
                     ? 50
                     : 30;
             ColorName = ColorName == "Aqua" ? "Magenta" : "Aqua";
-            Users.Add(new UserInfo("Джон Смит", 45, ""));
+            Users.Add(new UserInfo("Джон Смит", 45, "") { Category = UserCategories.Admin });
             //RaisePropertyChanged(nameof(Users));
         }
 
