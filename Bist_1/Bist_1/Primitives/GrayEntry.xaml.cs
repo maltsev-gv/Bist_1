@@ -1,0 +1,70 @@
+﻿using System;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Bist_1.Primitives
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class GrayEntry : ContentView
+    {
+        public GrayEntry()
+        {
+            InitializeComponent();
+        }
+
+        public string Text
+        {
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
+        }
+
+        public static readonly BindableProperty TextProperty =
+            BindableProperty.Create(nameof(Text), typeof(string), typeof(GrayEntry), null, BindingMode.TwoWay);
+
+        public string Prompt
+        {
+            get => (string)GetValue(PromptProperty);
+            set => SetValue(PromptProperty, value);
+        }
+
+        public static readonly BindableProperty PromptProperty =
+            BindableProperty.Create(nameof(Prompt), typeof(string), typeof(GrayEntry), null, BindingMode.TwoWay);
+
+        public bool IsPassword
+        {
+            get => (bool)GetValue(IsPasswordProperty);
+            set => SetValue(IsPasswordProperty, value);
+        }
+
+        public static readonly BindableProperty IsPasswordProperty =
+            BindableProperty.Create(nameof(IsPassword), typeof(bool), typeof(GrayEntry), null, BindingMode.TwoWay);
+
+        public Keyboard Keyboard
+        {
+            get => (Keyboard)GetValue(KeyboardProperty);
+            set => SetValue(KeyboardProperty, value);
+        }
+
+        public static readonly BindableProperty KeyboardProperty =
+            BindableProperty.Create(nameof(Keyboard), typeof(Keyboard), typeof(GrayEntry), Keyboard.Text, BindingMode.TwoWay, OnKeyboardChanged);
+
+        private static bool OnKeyboardChanged(BindableObject bindable, object value)
+        {
+            return true;
+        }
+
+        private void ImageButton_OnPressed(object sender, EventArgs e)
+        {
+            var pos = entry.CursorPosition;
+            entry.IsPassword = false;
+            entry.CursorPosition = pos;
+        }
+
+        private void ImageButton_OnReleased(object sender, EventArgs e)
+        {
+            var pos = entry.CursorPosition;
+            entry.IsPassword = true;
+            entry.CursorPosition = pos;
+        }
+    }
+}

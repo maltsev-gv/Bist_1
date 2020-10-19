@@ -19,12 +19,7 @@ namespace Rcn.Common
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (PropertyChanged == null)
-            {
-                return;
-            }
-
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             //if (!string.IsNullOrEmpty(propertyName) && !_propDict.ContainsKey(propertyName))
             //{
             //    var pi = this.GetType().GetProperty(propertyName,
@@ -105,10 +100,10 @@ namespace Rcn.Common
         }
 
         public override string ToString()
-        {
+        {//                                 "UserInfo: "
             var sb = new StringBuilder($"{GetType().Name}: ");
             foreach (var keyValuePair in _propDict)
-            {
+            {       //       "Age : 47; "
                 sb.Append($"{keyValuePair.Key} : {(keyValuePair.Value == null ? "null" : $"{keyValuePair.Value}")}; ");
             }
             return sb.ToString();

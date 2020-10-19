@@ -4,6 +4,7 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:vm123="clr-namespace:Bist_1.ViewModels;assembly=Bist_1"
             xmlns:converters="clr-namespace:Bist_1.Converters;assembly=Bist_1"
+            xmlns:primitives="clr-namespace:Bist_1.Primitives;assembly=Bist_1"
             xmlns:enums="clr-namespace:Bist_1.Models;assembly=Bist_1"
             x:Class="Bist_1.MainPage"
             x:Name="mainPage"
@@ -25,6 +26,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5*"/>
                             <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -56,8 +58,8 @@
                             </Label.Style>
                         </Label>
                         <Label Grid.Column="1" Grid.Row="0" Text="{Binding Age}" FontAttributes="Bold" Style="{StaticResource labelRedStyle}"/>
-                        <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Photo}" HorizontalOptions="Center" FontSize="16"
-                                   IsVisible="{Binding Photo, Converter={StaticResource emptyStringToBoolConverter}}" BackgroundColor="DeepSkyBlue"/>
+                        <Image Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Source="Diagram.png" 
+                               WidthRequest="200"  HeightRequest="50" Aspect="Fill" BackgroundColor="LightGreen"/>
                     </Grid>
                 </Frame>
             </ViewCell>
@@ -87,6 +89,7 @@
         <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" 
                FontSize="16" Padding="30,0,30,0" Style="{StaticResource labelUnderlinedStyle}"/>
         <Entry Text="{Binding Login}" Keyboard="Text"/>
+        <primitives:GrayEntry Text="{Binding NewLogin}" Keyboard="Text" IsPassword="True" Prompt="Введите новый логин"/>
         <!--<Label Margin="30,24,30,0">
             <Label.FontSize>50</Label.FontSize>
             <Label.FormattedText>
@@ -100,6 +103,9 @@
         </Label>-->
         <ListView ItemsSource="{Binding Users}" Margin="10,0" HasUnevenRows="True" SeparatorVisibility="Default" SeparatorColor="Chocolate"
                   SelectionMode="None" ItemTapped="ListView_OnItemTapped" ItemTemplate="{StaticResource userCategorySelector}">
+            <ListView.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding}"></TapGestureRecognizer>
+            </ListView.GestureRecognizers>
 
         </ListView>
         <!--<Button Text="Нажми меня" Clicked="Button_OnClicked" IsEnabled="{Binding BindingContext, Source={x:Reference mainPage}, 

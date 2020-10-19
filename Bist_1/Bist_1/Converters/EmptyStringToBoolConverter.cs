@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Bist_1.ExtensionMethods;
 using Bist_1.ViewModels;
 using Xamarin.Forms;
 
@@ -16,7 +17,13 @@ namespace Bist_1.Converters
             //    return !string.IsNullOrEmpty(mainViewModel.Login);
             //}
 
-            return value is string strValue && !string.IsNullOrEmpty(strValue);
+            var result = value is string strValue && !strValue.IsNullOrEmpty();
+            if (parameter is string strParam && strParam.ToLower().StartsWith("r"))
+            {
+                return !result;
+            }
+
+            return result;
 
             //if (value is string strValue)
             //{

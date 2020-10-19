@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters1="clr-namespace:Bist_1.Converters;assembly=Bist_1"
+             mc:Ignorable="d"
+             x:Class="Bist_1.Primitives.GrayEntry"
+             x:Name="grayEntry">
+    <ContentView.Content>
+        <Frame BorderColor="Gray" CornerRadius="10" Padding="5,0" MinimumHeightRequest="50">
+            <Frame.Style>
+                <Style TargetType="{x:Type Frame}">
+                    <Style.Triggers>
+                        <DataTrigger TargetType="{x:Type Frame}" 
+                                     Binding="{Binding Text, Converter={StaticResource emptyStringToBoolConverter}, Source={x:Reference grayEntry}}" Value="false">
+                            <Setter Property="BackgroundColor" Value="#EEEEEE"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Frame.Style>
+            <Grid>
+                <Label Text="{Binding Prompt, Source={x:Reference grayEntry}}" TextColor="Gray" 
+                       IsVisible="{Binding Text, Source={x:Reference grayEntry}, Converter={converters1:EmptyStringToBoolConverter}, ConverterParameter=Reverse}" 
+                     VerticalOptions="Center" Margin="5,0"/>
+                <Entry x:Name="entry" Text="{Binding Text, Source={x:Reference grayEntry}}" IsPassword="{Binding IsPassword, Source={x:Reference grayEntry}, Mode=OneWay}" 
+                       Keyboard="{Binding Keyboard, Source={x:Reference grayEntry}}"/>
+                <ImageButton HorizontalOptions="End" WidthRequest="30" Source="eye.png" Pressed="ImageButton_OnPressed" Released="ImageButton_OnReleased"
+                             IsVisible="{Binding IsPassword, Source={x:Reference grayEntry}}" BackgroundColor="Transparent"/>
+            </Grid>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

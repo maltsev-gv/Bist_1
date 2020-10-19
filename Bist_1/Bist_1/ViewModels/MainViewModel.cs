@@ -27,7 +27,10 @@ namespace Bist_1.ViewModels
             _dataManager = new DataManager();
             Users = new ObservableCollection<UserInfo>(_dataManager.GetUsers());
             Users.CollectionChanged += Users_CollectionChanged;
+            Users[0].PropertyChanged += MainViewModel_PropertyChanged;
             ChangeRadiusCommand = new Command(obj => ChangeRadiusMethod(obj, true));
+
+            Login = "Введите логин";
             //object obj = new object();
 
             //double x = 5.56e12;
@@ -36,6 +39,10 @@ namespace Bist_1.ViewModels
             //Radius = 2;
             //MyMethod();
 
+        }
+
+        private void MainViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
         }
 
         private void Users_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -90,6 +97,12 @@ namespace Bist_1.ViewModels
         }
 
         public string Login
+        {
+            get => GetVal<string>();
+            set => SetVal(value);
+        }
+
+        public string NewLogin
         {
             get => GetVal<string>();
             set => SetVal(value);
