@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace InquirerForAndroid.UserControls
+namespace Bist_1.Primitives
 {
     public partial class ContentButton : ContentView
     {
@@ -13,30 +13,31 @@ namespace InquirerForAndroid.UserControls
             GestureRecognizers.Add(_tapGestureRecognizer);
         }
 
-        //protected override void OnChildAdded(Element child)
-        //{
-        //    base.OnChildAdded(child);
-        //    if (child is View childview)
-        //    {
-        //        childview.GestureRecognizers.Add(_tapGestureRecognizer);
-        //    }
-        //}
+        public ICommand Command
+        {
+            get => (ICommand)GetValue(CommandProperty);
+            set => SetValue(CommandProperty, value);
+        }
 
         public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(ICommand),
             typeof(ContentButton), null, BindingMode.Default, null, CommandPropertyChanged);
 
         private static void CommandPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
+            //var command1 = (ICommand) newValue;
+            //var contentButton1 = (ContentButton) bindable;
+            //contentButton1._tapGestureRecognizer.Command = command1;
+
             if (newValue is ICommand command && bindable is ContentButton contentButton)
             {
                 contentButton._tapGestureRecognizer.Command = command;
             }
         }
 
-        public ICommand Command
+        public object CommandParameter
         {
-            get => (ICommand)GetValue(CommandProperty);
-            set => SetValue(CommandProperty, value);
+            get => GetValue(CommandParameterProperty);
+            set => SetValue(CommandParameterProperty, value);
         }
 
         public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(nameof(CommandParameter), typeof(object),
@@ -49,12 +50,5 @@ namespace InquirerForAndroid.UserControls
                 contentButton._tapGestureRecognizer.CommandParameter = newValue;
             }
         }
-
-        public ICommand CommandParameter
-        {
-            get => (ICommand)GetValue(CommandParameterProperty);
-            set => SetValue(CommandParameterProperty, value);
-        }
-
     }
 }

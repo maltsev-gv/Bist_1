@@ -6,6 +6,7 @@
             xmlns:converters="clr-namespace:Bist_1.Converters;assembly=Bist_1"
             xmlns:primitives="clr-namespace:Bist_1.Primitives;assembly=Bist_1"
             xmlns:enums="clr-namespace:Bist_1.Models;assembly=Bist_1"
+            xmlns:services="clr-namespace:Bist_1.Services;assembly=Bist_1"
             x:Class="Bist_1.MainPage"
             x:Name="mainPage"
             >
@@ -85,9 +86,17 @@
                    TextColor="{Binding ColorName}" FontSize="36" 
                    FontAttributes="Bold,Italic"/>
         </Frame>
-        <Label Text="Start developing now" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold,Italic" Style="{StaticResource labelRedStyle}"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" 
-               FontSize="16" Padding="30,0,30,0" Style="{StaticResource labelUnderlinedStyle}"/>
+        <Label FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold,Italic" Style="{StaticResource labelRedStyle}"
+               services:Translator.Russian="Начинаем разработку"
+               services:Translator.English="Start developing now"/>
+
+        <Entry FontSize="16" Style="{StaticResource labelUnderlinedStyle}"
+               services:Translator.Russian="Измените ваш XAML"
+               services:Translator.English="Make changes to your XAML ">
+        </Entry>
+        <!--<Label.Text>
+                "Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!"
+            </Label.Text>-->
         <Entry Text="{Binding Login}" Keyboard="Text"/>
         <primitives:GrayEntry Text="{Binding NewLogin}" Keyboard="Text" IsPassword="True" Prompt="Введите новый логин"/>
         <!--<Label Margin="30,24,30,0">

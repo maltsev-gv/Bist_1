@@ -6,4 +6,11 @@
         Admin,
         Manager
     }
+
+    public enum Languages
+    {
+        NotDefined,
+        English,
+        Russian,
+    }
 }

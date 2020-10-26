@@ -19,7 +19,16 @@ namespace Bist_1.Primitives
         }
 
         public static readonly BindableProperty TextProperty =
-            BindableProperty.Create(nameof(Text), typeof(string), typeof(GrayEntry), null, BindingMode.TwoWay);
+            BindableProperty.Create(nameof(Text), typeof(string), typeof(GrayEntry), null, BindingMode.TwoWay, OnTextChanged);
+
+        private static bool OnTextChanged(BindableObject bindable, object value)
+        {
+            var grayEntry = (GrayEntry)bindable;
+            grayEntry.frame.BorderColor = grayEntry.Text?.Length > 5 ? Color.Crimson : Color.Gray;
+            //grayEntry.Text != null && grayEntry.Text.Length > 5 ? Color.Crimson : Color.Gray;
+
+            return true;
+        }
 
         public string Prompt
         {
@@ -28,7 +37,7 @@ namespace Bist_1.Primitives
         }
 
         public static readonly BindableProperty PromptProperty =
-            BindableProperty.Create(nameof(Prompt), typeof(string), typeof(GrayEntry), null, BindingMode.TwoWay);
+            BindableProperty.Create(nameof(Prompt), typeof(string), typeof(GrayEntry));
 
         public bool IsPassword
         {
@@ -37,7 +46,7 @@ namespace Bist_1.Primitives
         }
 
         public static readonly BindableProperty IsPasswordProperty =
-            BindableProperty.Create(nameof(IsPassword), typeof(bool), typeof(GrayEntry), null, BindingMode.TwoWay);
+            BindableProperty.Create(nameof(IsPassword), typeof(bool), typeof(GrayEntry));
 
         public Keyboard Keyboard
         {
@@ -50,6 +59,10 @@ namespace Bist_1.Primitives
 
         private static bool OnKeyboardChanged(BindableObject bindable, object value)
         {
+            var grayEntry = (GrayEntry) bindable;
+            if (grayEntry.Keyboard == Keyboard.Numeric)
+            { 
+            }
             return true;
         }
 

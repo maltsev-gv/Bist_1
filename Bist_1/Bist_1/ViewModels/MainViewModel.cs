@@ -28,7 +28,7 @@ namespace Bist_1.ViewModels
             Users = new ObservableCollection<UserInfo>(_dataManager.GetUsers());
             Users.CollectionChanged += Users_CollectionChanged;
             Users[0].PropertyChanged += MainViewModel_PropertyChanged;
-            ChangeRadiusCommand = new Command(obj => ChangeRadiusMethod(obj, true));
+            ChangeRadiusCommand = new Command(parameter => ChangeRadiusMethod(parameter, true));
 
             Login = "Введите логин";
             //object obj = new object();
@@ -96,6 +96,8 @@ namespace Bist_1.ViewModels
             }
         }
 
+        public int X = 12;
+
         public string Login
         {
             get => GetVal<string>();
@@ -107,6 +109,12 @@ namespace Bist_1.ViewModels
             get => GetVal<string>();
             set => SetVal(value);
         }
+
+        public ICommand HeaderTappedCommand => new Command(parameter =>
+        {
+            string numValue = parameter is UserCategories userCategory ? ((int) userCategory).ToString() : "";
+            NewLogin = parameter.ToString() + numValue;
+        });
 
         //public string Login
         //{

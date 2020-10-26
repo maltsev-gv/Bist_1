@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bist_1.Models;
+﻿using Bist_1.Models;
+using Bist_1.Services;
 using Bist_1.ViewModels;
 using Xamarin.Forms;
 
@@ -15,6 +10,7 @@ namespace Bist_1
         public MainPage()
         {
             InitializeComponent();
+            Translator.Language = Languages.English;
         }
 
         //private void Button_OnClicked(object sender, EventArgs e)
