@@ -19,15 +19,13 @@ namespace Bist_1.Primitives
         }
 
         public static readonly BindableProperty TextProperty =
-            BindableProperty.Create(nameof(Text), typeof(string), typeof(GrayEntry), null, BindingMode.TwoWay, OnTextChanged);
+            BindableProperty.Create(nameof(Text), typeof(string), typeof(GrayEntry), null, BindingMode.TwoWay, propertyChanged: OnTextChanged);
 
-        private static bool OnTextChanged(BindableObject bindable, object value)
+        private static void OnTextChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var grayEntry = (GrayEntry)bindable;
             grayEntry.frame.BorderColor = grayEntry.Text?.Length > 5 ? Color.Crimson : Color.Gray;
             //grayEntry.Text != null && grayEntry.Text.Length > 5 ? Color.Crimson : Color.Gray;
-
-            return true;
         }
 
         public string Prompt
@@ -55,15 +53,14 @@ namespace Bist_1.Primitives
         }
 
         public static readonly BindableProperty KeyboardProperty =
-            BindableProperty.Create(nameof(Keyboard), typeof(Keyboard), typeof(GrayEntry), Keyboard.Text, BindingMode.TwoWay, OnKeyboardChanged);
+            BindableProperty.Create(nameof(Keyboard), typeof(Keyboard), typeof(GrayEntry), Keyboard.Text, BindingMode.TwoWay, propertyChanged: OnKeyboardChanged);
 
-        private static bool OnKeyboardChanged(BindableObject bindable, object value)
+        private static void OnKeyboardChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var grayEntry = (GrayEntry) bindable;
             if (grayEntry.Keyboard == Keyboard.Numeric)
             { 
             }
-            return true;
         }
 
         private void ImageButton_OnPressed(object sender, EventArgs e)
