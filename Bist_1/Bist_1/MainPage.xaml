@@ -81,7 +81,7 @@
     </ContentPage.Resources>
 
     <StackLayout>
-        <Frame BackgroundColor="LightSkyBlue" Padding="10,50,0,10" CornerRadius="{Binding Radius}" BorderColor="Red" >
+        <Frame BackgroundColor="LightSkyBlue" Margin="10" Padding="10,50,0,10" CornerRadius="{Binding Radius}" BorderColor="Red" >
             <Label Text="{Binding ColorName}" HorizontalTextAlignment="Center" 
                    TextColor="{Binding ColorName}" FontSize="36" 
                    FontAttributes="Bold,Italic"/>
@@ -110,7 +110,8 @@
                 </FormattedString>
             </Label.FormattedText>
         </Label>-->
-        <ListView ItemsSource="{Binding Users}" Margin="10,0" HasUnevenRows="True" SeparatorVisibility="Default" SeparatorColor="Chocolate"
+        <ListView ItemsSource="{Binding Users}" Margin="10,0" HasUnevenRows="True" SeparatorVisibility="Default" 
+                  SeparatorColor="Chocolate"
                   SelectionMode="None" ItemTapped="ListView_OnItemTapped" ItemTemplate="{StaticResource userCategorySelector}">
             <ListView.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding}"></TapGestureRecognizer>

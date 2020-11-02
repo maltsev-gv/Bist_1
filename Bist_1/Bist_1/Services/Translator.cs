@@ -1,31 +1,46 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Bist_1.Models;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace Bist_1.Services
 {
     public class Translator : BindableObject
     {
+        public string LanguageStr { get; set; }
+
         private static Languages _language = Languages.English;
         public static Languages Language
         {
             get => _language;
             set
             {
+                var translatorType = typeof(Translator);
+                var translatorProps = translatorType.GetProperties();
+                translatorProps = translatorType.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+
                 foreach (var keyValuePair in _translations)
                 {
-                    switch (keyValuePair.Key.GetType().Name)
+                    var elemType = keyValuePair.Key.GetType();
+                    var props = elemType.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+                    var piText = props.FirstOrDefault<PropertyInfo>(pi => pi.Name == "Text" && pi.CanWrite);
+
+                    //var propsForReadOnly = props.Where(pi => !pi.CanWrite).ToList();
+                    //var pi2 = propsForReadOnly.Find(pi => pi.Name == "Text");
+
+                    if (piText != null)
                     {
-                        case nameof(Label):
-                            ((Label) keyValuePair.Key).Text = value == Languages.Russian
-                                ? keyValuePair.Value.Russian
-                                : keyValuePair.Value.English;
-                            break;
-                        case nameof(Entry):
-                            ((Entry)keyValuePair.Key).Text = value == Languages.Russian
-                                ? keyValuePair.Value.Russian
-                                : keyValuePair.Value.English;
-                            break;
+                        var text = piText.GetValue(keyValuePair.Key);
+
+                        var z = default(BindingFlags);
+                        piText.SetValue(keyValuePair.Key, 
+                            value == Languages.Russian
+                                    ? keyValuePair.Value.Russian
+                                    : keyValuePair.Value.English);
+
+                        text = piText.GetValue(keyValuePair.Key);
                     }
                 }
             }

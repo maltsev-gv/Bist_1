@@ -31,6 +31,7 @@ namespace Bist_1.ViewModels
             ChangeRadiusCommand = new Command(parameter => ChangeRadiusMethod(parameter, true));
 
             Login = "Введите логин";
+            //MyMethod2();
             //object obj = new object();
 
             //double x = 5.56e12;
@@ -39,6 +40,13 @@ namespace Bist_1.ViewModels
             //Radius = 2;
             //MyMethod();
 
+        }
+
+        public static void MyMethod2()
+        {
+            var newVm = new MainViewModel();
+            newVm.Login = "";
+            MainViewModel.MyMethod2();
         }
 
         private void MainViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)

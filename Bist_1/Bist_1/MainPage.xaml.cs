@@ -1,4 +1,5 @@
-﻿using Bist_1.Models;
+﻿using System.Linq;
+using Bist_1.Models;
 using Bist_1.Services;
 using Bist_1.ViewModels;
 using Xamarin.Forms;
@@ -31,6 +32,11 @@ namespace Bist_1
 
         private void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
+            var res1 = mainPage.Resources["labelUnderlinedStyle"];
+            var resources = mainPage.Resources.ToList();
+            var styles = mainPage.Resources.Values.OfType<Style>().ToList();
+
+
             var userInfo = e.Item as UserInfo;
 
             var context = mainPage.BindingContext;
