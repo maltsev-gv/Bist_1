@@ -25,6 +25,9 @@ namespace Bist_1.ViewModels
         public MainViewModel()
         {
             _dataManager = new DataManager();
+            var host = Resources.DefaultHost;
+            var enums = Resources.Enums;
+            var eye = Resources.eye;
             Users = new ObservableCollection<UserInfo>(_dataManager.GetUsers());
             Users.CollectionChanged += Users_CollectionChanged;
             Users[0].PropertyChanged += MainViewModel_PropertyChanged;

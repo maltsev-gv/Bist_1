@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Bist_1.Views.Page3"
+             NavigationPage.BackButtonTitle="Back to 2"
+             >
+    <!--Title="Страница 3"-->
+    <!--<NavigationPage.TitleView>
+        <Label Text="My page 3"/>
+    </NavigationPage.TitleView>-->
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <Button Text="На главную" Clicked="Button_ToRootPage_OnClicked"></Button>
+            <Button Text="На предыдущую" Clicked="Button_ToPrevPage_OnClicked"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

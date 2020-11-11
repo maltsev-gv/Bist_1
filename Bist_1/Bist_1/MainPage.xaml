@@ -8,8 +8,17 @@
             xmlns:enums="clr-namespace:Bist_1.Models;assembly=Bist_1"
             xmlns:services="clr-namespace:Bist_1.Services;assembly=Bist_1"
             x:Class="Bist_1.MainPage"
-            x:Name="mainPage"
-            >
+            Title="Главная"
+            x:Name="mainPage">
+    <!--Title="Главная"
+    NavigationPage.TitleIconImageSource="eye.png"-->
+
+    <!--<NavigationPage Title="Настройки">
+        <x:Arguments>
+            <views:SettingsPage />
+        </x:Arguments>
+    </NavigationPage>-->
+
     <ContentPage.BindingContext>
         <vm123:MainViewModel/>
     </ContentPage.BindingContext>
@@ -80,26 +89,27 @@
 
     </ContentPage.Resources>
 
-    <StackLayout>
-        <Frame BackgroundColor="LightSkyBlue" Margin="10" Padding="10,50,0,10" CornerRadius="{Binding Radius}" BorderColor="Red" >
-            <Label Text="{Binding ColorName}" HorizontalTextAlignment="Center" 
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame BackgroundColor="LightSkyBlue" Margin="10" Padding="10,50,0,10" CornerRadius="{Binding Radius}" BorderColor="Red" >
+                <Label Text="{Binding ColorName}" HorizontalTextAlignment="Center" 
                    TextColor="{Binding ColorName}" FontSize="36" 
                    FontAttributes="Bold,Italic"/>
-        </Frame>
-        <Label FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold,Italic" Style="{StaticResource labelRedStyle}"
+            </Frame>
+            <Label FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold,Italic" Style="{StaticResource labelRedStyle}"
                services:Translator.Russian="Начинаем разработку"
                services:Translator.English="Start developing now"/>
 
-        <Entry FontSize="16" Style="{StaticResource labelUnderlinedStyle}"
+            <Entry FontSize="16" Style="{StaticResource labelUnderlinedStyle}"
                services:Translator.Russian="Измените ваш XAML"
                services:Translator.English="Make changes to your XAML ">
-        </Entry>
-        <!--<Label.Text>
+            </Entry>
+            <!--<Label.Text>
                 "Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!"
             </Label.Text>-->
-        <Entry Text="{Binding Login}" Keyboard="Text"/>
-        <primitives:GrayEntry Text="{Binding NewLogin}" Keyboard="Text" IsPassword="True" Prompt="Введите новый логин"/>
-        <!--<Label Margin="30,24,30,0">
+            <Entry Text="{Binding Login}" Keyboard="Text"/>
+            <primitives:GrayEntry Text="{Binding NewLogin}" Keyboard="Text" IsPassword="True" Prompt="Введите новый логин"/>
+            <!--<Label Margin="30,24,30,0">
             <Label.FontSize>50</Label.FontSize>
             <Label.FormattedText>
                 <FormattedString>
@@ -110,20 +120,20 @@
                 </FormattedString>
             </Label.FormattedText>
         </Label>-->
-        <ListView ItemsSource="{Binding Users}" Margin="10,0" HasUnevenRows="True" SeparatorVisibility="Default" 
+            <ListView ItemsSource="{Binding Users}" Margin="10,0" HasUnevenRows="True" SeparatorVisibility="Default" 
                   SeparatorColor="Chocolate"
                   SelectionMode="None" ItemTapped="ListView_OnItemTapped" ItemTemplate="{StaticResource userCategorySelector}">
-            <ListView.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding}"></TapGestureRecognizer>
-            </ListView.GestureRecognizers>
+                <ListView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding}"></TapGestureRecognizer>
+                </ListView.GestureRecognizers>
 
-        </ListView>
-        <!--<Button Text="Нажми меня" Clicked="Button_OnClicked" IsEnabled="{Binding BindingContext, Source={x:Reference mainPage}, 
+            </ListView>
+            <!--<Button Text="Нажми меня" Clicked="Button_OnClicked" IsEnabled="{Binding BindingContext, Source={x:Reference mainPage}, 
             Converter={StaticResource emptyStringToBoolConverter}}"/>-->
-        <Button Text="Нажми меня" 
+            <Button Text="Нажми меня" 
                 Margin="0,0,0,100" Command="{Binding ChangeRadiusCommand}" CommandParameter="{Binding}" 
                 IsEnabled="{Binding Login, Converter={StaticResource emptyStringToBoolConverter}}" />
-        <!--<Button Text="Нажми меня 2" Clicked="Button_OnClicked" IsEnabled="{Binding , Converter={converters:EmptyStringToBoolConverter}}"/>-->
-    </StackLayout>
-
+            <Button Text="Страница 2" Clicked="Page2_button_OnClicked" />
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
