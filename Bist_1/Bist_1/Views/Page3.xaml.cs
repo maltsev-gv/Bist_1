@@ -14,11 +14,13 @@ namespace Bist_1.Views
 
         private void Button_ToRootPage_OnClicked(object sender, EventArgs e)
         {
+            //((NavigationPage)Application.Current.MainPage).Navigation.PopToRootAsync();
             Navigation.PopToRootAsync();
         }
 
         private void Button_ToPrevPage_OnClicked(object sender, EventArgs e)
         {
+            //((NavigationPage)Application.Current.MainPage).Navigation.PopAsync();
             Navigation.PopAsync();
         }
     }

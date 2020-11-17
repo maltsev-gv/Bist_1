@@ -25,6 +25,7 @@ namespace Bist_1.Services
                 {
                     var elemType = keyValuePair.Key.GetType();
                     var props = elemType.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+                    var methods = elemType.GetMethods();
                     var piText = props.FirstOrDefault<PropertyInfo>(pi => pi.Name == "Text" && pi.CanWrite);
 
                     //var propsForReadOnly = props.Where(pi => !pi.CanWrite).ToList();

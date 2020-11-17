@@ -1,4 +1,6 @@
-﻿using Rcn.Common;
+﻿using Bist_1.Services;
+using Rcn.Common;
+using Xamarin.Forms;
 
 namespace Bist_1.Models
 {
@@ -18,7 +20,7 @@ namespace Bist_1.Models
         public string Name
         {
             get => GetVal<string>();
-            set => SetVal(value);
+            set => SetVal(value, () => DependencyService.Get<IToastService>().LongAlert("Привет, " + value));
         }
 
         public int Age

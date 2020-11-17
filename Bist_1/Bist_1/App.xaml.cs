@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Bist_1.Views;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Bist_1
 {
@@ -10,7 +9,8 @@ namespace Bist_1
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new MasterDetailPage1();
+            //MainPage = new NavigationPage(new MainPage());
             //MainPage = new MainPage();
         }
 

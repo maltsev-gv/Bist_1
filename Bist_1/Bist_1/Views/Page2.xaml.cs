@@ -46,9 +46,14 @@ namespace Bist_1.Views
             return true;
         }
 
-        private void Button_Page3_OnClicked(object sender, EventArgs e)
+        private async void Button_Page3_OnClicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new Page3() { Title = "New page 3" });
+            //Navigation.PushAsync(new NavigationPage(new Page3() { Title = "New page 3" }) { Title = "NavPage 3" });
+            //await Navigation.PushAsync(new Page3() { Title = "New page 3" });
+            ((MasterDetailPage1) Application.Current.MainPage).Detail =
+                //new Page3() { Title = "New page 3" };
+                new NavigationPage(new Page3() { Title = "New page 3" }) { Title = "NavPage 3" };
+            var x = 1;
         }
 
         private void Button_ModalPage_OnClicked(object sender, EventArgs e)
