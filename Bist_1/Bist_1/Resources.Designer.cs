@@ -103,5 +103,14 @@ namespace Bist_1 {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 123.
+        /// </summary>
+        public static string myRes {
+            get {
+                return ResourceManager.GetString("myRes", resourceCulture);
+            }
+        }
     }
 }

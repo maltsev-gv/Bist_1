@@ -3,13 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Bist_1.Views.MasterDetailPage1"
              xmlns:pages="clr-namespace:Bist_1.Views"
-             xmlns:bist1="clr-namespace:Bist_1;assembly=Bist_1">
+             xmlns:bist1="clr-namespace:Bist_1;assembly=Bist_1"
+             BackgroundColor="{StaticResource NavigationPrimary}">
   <MasterDetailPage.Master>
     <!--<pages:MasterDetailPage1Master x:Name="MasterPage" />-->
     <bist1:MainPage/>
   </MasterDetailPage.Master>
   <MasterDetailPage.Detail>
-    <NavigationPage>
+        <NavigationPage BarBackgroundColor="{StaticResource NavigationPrimary}" BackgroundColor="DarkCyan">
       <x:Arguments>
           <pages:Page2/>
           <!--<pages:MasterDetailPage1Detail />-->

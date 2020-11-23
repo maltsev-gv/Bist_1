@@ -19,7 +19,8 @@ namespace Bist_1.Primitives
         }
 
         public static readonly BindableProperty TextProperty =
-            BindableProperty.Create(nameof(Text), typeof(string), typeof(GrayEntry), null, BindingMode.TwoWay, propertyChanged: OnTextChanged);
+            BindableProperty.Create(nameof(Text), typeof(string), typeof(GrayEntry), 
+                null, BindingMode.TwoWay, propertyChanged: OnTextChanged);
 
         private static void OnTextChanged(BindableObject bindable, object oldValue, object newValue)
         {

@@ -13,7 +13,8 @@
                 <Style TargetType="{x:Type Frame}">
                     <Style.Triggers>
                         <DataTrigger TargetType="{x:Type Frame}" 
-                                     Binding="{Binding Text, Converter={StaticResource emptyStringToBoolConverter}, Source={x:Reference grayEntry}}" Value="false">
+                                     Binding="{Binding Text, Converter={StaticResource emptyStringToBoolConverter}, Source={x:Reference grayEntry}}" 
+                                     Value="false">
                             <Setter Property="BackgroundColor" Value="#EEEEEE"/>
                         </DataTrigger>
                     </Style.Triggers>

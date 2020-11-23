@@ -21,7 +21,10 @@ namespace Bist_1.Views
         private void Button_ToPrevPage_OnClicked(object sender, EventArgs e)
         {
             //((NavigationPage)Application.Current.MainPage).Navigation.PopAsync();
-            Navigation.PopAsync();
+            //Navigation.PopAsync();
+            ((MasterDetailPage1)Application.Current.MainPage).Detail =
+                new NavigationPage(new Page2());
+
         }
     }
 }

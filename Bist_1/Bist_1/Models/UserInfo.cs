@@ -1,6 +1,7 @@
 ﻿using Bist_1.Services;
 using Rcn.Common;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace Bist_1.Models
 {

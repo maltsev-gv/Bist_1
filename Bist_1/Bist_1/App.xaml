@@ -9,8 +9,9 @@
             <converters:EmptyStringToBoolConverter x:Key="emptyStringToBoolConverter"/>
             <converters:AgeClassifierConverter x:Key="ageClassifierConverter"/>
 
-            <Color x:Key="NavigationPrimary">#2196F3</Color>
-            <x:String x:Key="myString">String value</x:String>
+            <!--<Color x:Key="NavigationPrimary">#2196F3</Color>-->
+            <Color x:Key="NavigationPrimary">Orange</Color>
+            <x:String x:Key="myString">String value &lt; &amp;</x:String>
             <x:Int32 x:Key="myNumber">1024</x:Int32>
 
             <Style TargetType="{x:Type Label}" x:Key="labelRedStyle">
