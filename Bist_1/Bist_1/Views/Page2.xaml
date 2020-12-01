@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:primitives="clr-namespace:Bist_1.Primitives;assembly=Bist_1"
+             xmlns:viewModels="clr-namespace:Bist_1.ViewModels;assembly=Bist_1"
+             xmlns:models="clr-namespace:Bist_1.Models;assembly=Bist_1"
              x:Class="Bist_1.Views.Page2"
              x:Name="page2"
              NavigationPage.HasBackButton="False"
@@ -25,11 +27,40 @@
         </Grid>
     </NavigationPage.TitleView>
 
+    <ContentPage.BindingContext>
+        <viewModels:NewsViewModel/>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <ListView ItemsSource="{Binding Items}" Margin="10,0" HasUnevenRows="True" SeparatorVisibility="Default" 
+                      SeparatorColor="Chocolate" 
+                      RefreshCommand="{Binding RefreshCommand}"
+                      IsPullToRefreshEnabled="true"
+                      IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                      SelectionMode="None" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame CornerRadius="10" BackgroundColor="Aquamarine" BorderColor="DarkViolet" HasShadow="True" >
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Title}" LineBreakMode="WordWrap" FontAttributes="Bold"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Text="{Binding CreatedDate}" HorizontalOptions="Start"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding Text}" LineBreakMode="TailTruncation" HorizontalOptions="Fill"/>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
             <Button Text="Модальная Страница" Clicked="Button_ModalPage_OnClicked"></Button>
             <Button Text="Страница 3" Clicked="Button_Page3_OnClicked"></Button>
         </StackLayout>

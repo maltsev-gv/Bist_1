@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace Rcn.Common.ExtensionMethods
+namespace Bist_1.ExtensionMethods
 {
     public static class ListExtensions
     {

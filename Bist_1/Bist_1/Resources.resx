@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DefaultHost" xml:space="preserve">
-    <value>http://somehost.com/api</value>
+    <value>http://82.200.26.0:8080/api/inquirer/</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Enums" type="System.Resources.ResXFileRef, System.Windows.Forms">

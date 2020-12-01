@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
-using Rcn.Common.ExtensionMethods;
+using Bist_1.ExtensionMethods;
 
-namespace Rcn.Common
+namespace Bist_1.ViewModels
 {
     /// <summary>
     /// Реализует хранение значений свойств и быстрый доступ к ним из дочерних классов. Реализует INotifyPropertyChanged. Изменение свойства инициирует вызов PropertyChanged

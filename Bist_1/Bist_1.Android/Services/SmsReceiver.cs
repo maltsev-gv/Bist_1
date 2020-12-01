@@ -5,8 +5,8 @@ using Android.App;
 using Android.Content;
 using Android.Telephony;
 using Android.Util;
+using Bist_1.ExtensionMethods;
 using Bist_1.Services;
-using Rcn.Common.ExtensionMethods;
 using Xamarin.Forms;
 
 namespace Bist_1.Droid.Services

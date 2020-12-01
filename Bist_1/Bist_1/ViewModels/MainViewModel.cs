@@ -11,7 +11,6 @@ using Bist_1.Annotations;
 using Bist_1.ExtensionMethods;
 using Bist_1.Models;
 using Bist_1.Services;
-using Rcn.Common;
 using Xamarin.Forms;
 
 namespace Bist_1.ViewModels

@@ -61,7 +61,7 @@ namespace Bist_1 {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на http://somehost.com/api.
+        ///   Ищет локализованную строку, похожую на http://82.200.26.0:8080/api/inquirer/.
         /// </summary>
         public static string DefaultHost {
             get {
